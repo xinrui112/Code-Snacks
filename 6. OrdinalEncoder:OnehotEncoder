@@ -1,0 +1,15 @@
+Ordinalencoder/OnehotEncoder
+
+#OrdinalEncoder
+from sklearn.preprocessing import OrdinalEncoder
+oe=OrdinalEncoder()
+housing_cat_encoded=oe.fit_transform(housing_cat)
+housing_cat_encoded
+oe.categories_
+
+from sklearn.preprocessing import OneHotEncoder
+ohe=OneHotEncoder()
+housing_cat_1hot=ohe.fit_transform(housing_cat)
+housing_cat_1hot
+ohe.categories_
+
