@@ -1,1 +1,1 @@
-# Notes
+# Code Snacks
