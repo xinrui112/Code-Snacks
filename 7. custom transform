@@ -1,0 +1,19 @@
+#custom transform
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class CombinedAttr(BaseEstimator, TransformerMixin):
+    def __init__(self,add_bedroom_per_room=True): #__ vs _
+        self.add_bedroom_per_room=add_bedroom_per_room
+    def fit(self,X,y=None):
+        return self
+    def transform(self,X,y=None):
+        room_per_households=X[:,3]/X[:,6]
+        population_per_households=X[:,5]/X[:,6]
+        if self.add_bedroom_per_room:
+            bedroom_per_room=X[:,4]/X[:,3]
+            return np.c_[X,room_per_households,bedroom_per_room,population_per_households]
+        else:
+            return np.c_[X,room_per_households,population_per_households]
+
+attr_adder=CombinedAttr(add_bedroom_per_room=True)
+housing_attr=attr_adder.transform(housing.values)
