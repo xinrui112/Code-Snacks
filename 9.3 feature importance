@@ -1,0 +1,10 @@
+#feature importance
+
+grid_search.best_estimator_.feature_importances_
+
+new_var=['room_per_households','bedroom_per_room','population_per_households']
+features=num_var+new_var+list(ohe.categories_[0])
+features
+
+feature_importances = pd.Series(grid_search.best_estimator_.feature_importances_, index=features)
+feature_importances.nlargest(10).plot(kind='barh')
