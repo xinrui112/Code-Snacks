@@ -1,0 +1,1 @@
+import pandas as pdimport numpy as npimport seaborn as snsimport matplotlib.pyplot as plt%matplotlib inlinedf=pd.read_csv('xxx.csv')df.to_csvdf.dtypesdf.drop('log_price',axis=1,inplace=True)
