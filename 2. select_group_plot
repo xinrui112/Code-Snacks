@@ -1,42 +1,40 @@
 1: select/group/plot
 
-* read and write data: pd.read_csv, df.to_csv
-df.dtypes
 * select features: 
-     - num_var=list(df.select_dtypes(include=np.number))
-     - num_var.remove('id')
+    - num_var=list(df.select_dtypes(include=np.number))
+    - num_var.remove('id')
 * select dataframe:
-     - two columns, 5 rows: df[:5][['id','price_doc']]
-     - query:
+    - two columns, 5 rows: df[:5][['id','price_doc']]
+    - query:
          * df[(df.full_sq>10) & (df.full_sq<1500)]
          * df.query('full_sq>10 and full_sq<1500')
-     - update values:
+    - update values:
          * sq_index = df.query('full_sq<life_sq').index
          * df.loc[sq_index,'life_sq'] = np.NaN
-     - drop columns:
+    - drop columns:
          * df.drop('log_price',axis=1,inplace=True)
 * group data:
-     - value_counts: 
+    - value_counts: 
          * na: df.life_sq.isna().sum()
          * df.product_type.value_counts()
          * df.product_type.value_counts(normalize=True)
-     - hierachical group:
+    - hierachical group:
          * grouped=df.groupby(['product_type','state']).size()
          * grouped.unstack(level='state')
-     - calculate median:
+    - calculate median:
          * df[['product_type','price_doc']].groupby('product_type').median()
          * df.pivot_table(index='product_type', values='price_doc', aggfunc=np.median)
-     - apply function:
+    - apply function:
          * df[['life_sq','num_room']].apply(lambda x: x[0]/x[1], axis=1)
          * time: 
            * df['timestamp'] = pd.to_datetime(df.timestamp)
            * df['ts_year']=df['timestamp'].apply(lambda x:x.year)
 * plot data:
-     - histgram:
+    - histgram:
          * df.price_doc.hist(bins=100)
          * df.price_doc.plot(kind='hist')
          * df.price_doc.plot.hist()
-     - log data:
+    - log data:
          * df['log_price']=np.log(df['price_doc'].values)
          * plt.hist(df['log_price'],bins=100); plt.grid()
 
