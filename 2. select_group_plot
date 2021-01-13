@@ -1,4 +1,5 @@
-Project 1: select/group/plot
+1: select/group/plot
+
 * read and write data: pd.read_csv, df.to_csv
 df.dtypes
 * select features: 
