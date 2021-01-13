@@ -1,1 +1,0 @@
-import pandas as pdimport numpy as npimport seaborn as snsimport matplotlib.pyplot as plt%matplotlib inlinedf.drop('log_price',axis=1,inplace=True)
