@@ -50,3 +50,57 @@ rf_rmse=cross_val_score(rf_reg,housing_prepared,housing_label,
 display_scores(-rf_rmse)
 
 rf.get_params()
+
+4)#KNN
+from sklearn.neighbors import KNeighborsClassifier as kNN
+from sklearn.metrics import accuracy_score, recall_score, f1_score
+X_train = train.drop('left',axis=1, inplace=False)
+Y_train = train['left']
+X_test = test.drop('left',axis=1, inplace=False)
+Y_test = test['left']
+
+model = kNN(n_neighbors = 3, algorithm='auto', weights='distance')
+model.fit(X_train,Y_train)
+
+y_pred = model.predict(X_test)
+
+print('KNN')
+print('acc:', accuracy_score(Y_test, y_pred))
+print('rec:', recall_score(Y_test, y_pred))
+print('F1:', f1_score(Y_test, y_pred))
+
+5) #Logistic Regression
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression(C = 100, class_weight = 'balanced', max_iter = 1000)
+model.fit(X_train,Y_train)
+
+Y_score = model.predict_proba(X_test)[:,1]
+y_pred = model.predict(X_test)
+
+print('Logistic Regression')
+print('acc:', accuracy_score(Y_test, y_pred))
+print('rec:', recall_score(Y_test, y_pred))
+print('F1:', f1_score(Y_test, y_pred))
+-----
+
+#ROC Curve function definition 
+from sklearn.metrics import roc_auc_score, roc_curve
+def roccurve():
+    model_roc_auc = round(roc_auc_score(Y_test, Y_score),3)
+    fpr, tpr, t = roc_curve(Y_test, Y_score)
+    trace4 = go.Scatter(x = fpr,y = tpr,
+                        name = "Roc : ",
+                        line = dict(color = ('rgb(22, 96, 167)'),width = 2), fill='tozeroy')
+    trace5 = go.Scatter(x = [0,1],y = [0,1],
+                        line = dict(color = ('black'),width = 1.5,
+                        dash = 'dot'))
+
+    layout = go.Layout(title = str("ROC Curve"+" "+'('+str(model_roc_auc)+')'),
+                   xaxis = dict(title = 'false positive rate'),
+                   yaxis = dict(title = 'true positive rate'))
+    fig = go.Figure(data=[trace4, trace5], layout= layout)
+    py.iplot(fig)
+roccurve()
+
+
