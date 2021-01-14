@@ -1,0 +1,38 @@
+Python template - Regression
+Goal:
+1. 
+2. Regression
+3. Assumptions:
+
+## 1. Import data
+
+## 2. Explotary Data Analysis (EDA)
+
+## 3. Prepare Data
+
+### 3.1 Data cleaning
+### 3.2 Cat Var
+### 3.3 New Col
+### 3.4 Feature Scaling
+### 3.5 Pipelines
+
+
+## 4. Modeling
+### 4.1 train/test split
+### 4.2 Train models
+Linear/Decision tree
+rmse
+random forest
+### 4.3 Model Evaluation
+
+Cross-validation
+
+GridSearchCV/RandomizedSeachCV
+
+### 4.4 Ensemble Models
+
+### 4.5 Feature Importance
+
+
+
+
