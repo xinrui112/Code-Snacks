@@ -33,6 +33,68 @@ GridSearchCV/RandomizedSeachCV
 
 ### 4.5 Feature Importance
 
+1) Decision Tree 
+from sklearn.tree import DecisionTreeRegressor
+model = DecisionTreeRegressor()
+model.fit(X_train, y_train)
+
+Y_score = model.predict_proba(X_test)[:,1]
+y_pred = model.predict(X_test)
+
+print('Decision Tree')
+print('acc:', accuracy_score(Y_test, y_pred))
+print('rec:', recall_score(Y_test, y_pred))
+print('F1:', f1_score(Y_test, y_pred))
+
+roccurve()
+
+----
+2) #Random Forest
+from sklearn.ensemble import RandomForestRegressor
+model = RandomForestRegressor()
+model.fit(X_train, y_train)
+
+Y_score = model.predict_proba(X_test)[:,1]
+y_pred = model.predict(X_test)
+
+print('Random Forest')
+print('acc:', accuracy_score(Y_test, y_pred))
+print('rec:', recall_score(Y_test, y_pred))
+print('F1:', f1_score(Y_test, y_pred))
+
+roccurve()
+
+
+----
+types of Regressions?
+Linear Regression
+Logistic Regression
+Polynomial Regression
+Stepwise Regression
+#Ridge Regression
+from sklearn.linear_model import RidgeCV
+model = Ridge()
+model.fit(X_train, y_train)
+
+#Lasso Regression
+from sklearn.linear_model import LassoCV
+model = LassoCV()
+model.fit(X_train, y_train)
+
+#ElasticNet Regression
+from sklearn.linear_model import ElasticNetCV
+model = ElasticNetCV()
+model.fit(X_train, y_train)
+
+Naive Bayes
+Regression Trees and Random Forests
+
+Simple Linear Regression
+Lasso Regression
+Logistic regression
+Support Vector Machines
+Multivariate Regression
+Multiple Regression
 
 
 
