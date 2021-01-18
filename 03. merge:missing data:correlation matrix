@@ -1,6 +1,7 @@
 Project 2: merge/missing data/correlation matrix
 - merge data:
     * df=train.merge(properties,left_on='parcelid', right_on='parcelid')
+    pd.merge(left, right, on="key")
 - missing data:
     * index & rename:
         * missing=df.isna().sum().reset_index()
@@ -8,6 +9,7 @@ Project 2: merge/missing data/correlation matrix
     * loc & sort:
         * missing= missing.loc[missing_df.count>0].sort_values(by='count')
         * ***SimpleImputer****
+        
         from sklearn.impute import SimpleImputer
         housing_num=housing.drop('ocean_proximity',axis=1) #drop cat col first.
 
@@ -51,4 +53,9 @@ Project 2: merge/missing data/correlation matrix
             * df=df.drop(dropcols,axis=1, inplace=True)
         
         * Q: how to set threshold vs select manually
+
+
+
+
+    
     
