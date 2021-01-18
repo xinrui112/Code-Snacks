@@ -1,0 +1,6 @@
+09.4 predict
+
+eclf.fit(X, Y)
+y = pd.DataFrame(eclf.predict(test.drop(['id'],axis=1)), columns=['y'])
+predict_data = pd.concat([y, test['id']], axis =1)
+predict_data.to_csv('Submmission.csv', index=False)
