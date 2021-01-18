@@ -1,0 +1,38 @@
+10.1 builde model-tensorflow
+
+#Define the functions that build and train a model
+def build_model(my_learning_rate, feature_layer):
+  # Create and compile a simple linear regression model.
+  model = tf.keras.models.Sequential() # Most simple tf.keras models are sequential.
+
+  # Describe the topography of the model.
+  model.add(feature_layer)
+  model.add(tf.keras.layers.Dense(units=1, input_shape=(1,))) #a single node in a single layer.
+
+  # Compile into TensorFlow. 
+  model.compile(optimizer=tf.keras.optimizers.RMSprop(lr=my_learning_rate),
+                loss="mean_squared_error",
+                metrics=[tf.keras.metrics.RootMeanSquaredError()])
+
+  return model        
+
+#Train the model by feeding feature and label.
+def train_model(model, df, epochs, batch_size, label_name):
+    
+  features = {name:np.array(value) for name, value in df.items()}
+  label = np.array(features.pop(label_name))
+    
+  history = model.fit(x=featurs,y=label,
+                      batch_size=batch_size,epochs=epochs,
+                      shuffle=True) # specified number of epochs. 
+
+  # Gather the trained model's weight and bias.
+  #trained_weight = model.get_weights()[0]
+  #trained_bias = model.get_weights()[1]
+
+  epochs = history.epoch # The list of epochs is stored separately from the rest of history.
+  
+  hist = pd.DataFrame(history.history) # Isolate the error for each epoch.
+  rmse = hist["root_mean_squared_error"] # Take a snapshot of the model's root mean squared error at each epoch. 
+
+  return epochs, rmse
