@@ -1,7 +1,7 @@
-Python template - Regression
+Python template - Classfication
 Goal:
 1. 
-2. Regression
+2. Classfication
 3. Assumptions:
 
 ## 1. Import data
@@ -20,9 +20,16 @@ Goal:
 ## 4. Modeling
 ### 4.1 train/test split
 ### 4.2 Train models
-Linear/Decision tree
-rmse
+SGDClassfier
 random forest
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+RF = RandomForestClassifier(class_weight = {0:1, 1:3})
+RF = RF.fit(x_train, y_train)
+y_pred = RF.predict(x_test)
+print (metrics.classification_report(y_test, y_pred))
+
 ### 4.3 Cross-validation
 
 ### 4.4 GridSearchCV/RandomizedSeachCV

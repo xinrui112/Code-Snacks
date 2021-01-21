@@ -39,4 +39,16 @@
          * plt.hist(df['log_price'],bins=100); plt.grid()
 
 
+np.arange(5, 12) #int
+5 6 7 8 9 10 11
+
+np.random.randint(low=50, high=101, size=6)
+
+np.random.random([6])
+0-1随机数float
+
+noise = (np.random.random([15])*2-1)*2   #-2  2
+label = label+noise
+
+
     

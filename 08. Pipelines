@@ -1,6 +1,7 @@
 Pipelines
 
 from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 
 num_pipeline=Pipeline([
@@ -25,3 +26,26 @@ full_pipeline=ColumnTransformer([
 housing_prepared=full_pipeline.fit_transform(housing)
 
 --------
+if no missing value, this works
+
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import OrdinalEncoder,OneHotEncoder,LabelEncoder
+from sklearn.compose import ColumnTransformer
+
+
+num_tr=Pipeline([
+    ('imputer', SimpleImputer(strategy='median')),
+    ('scaler', StandardScaler())
+])
+
+prep=ColumnTransformer([
+    ('num',num_tr,num_var),
+    ('imputer', SimpleImputer(strategy='most_frequent'),cat_var),
+    ('cat',OneHotEncoder(),cat_var)
+])
+
+df_prep=prep.fit_transform(df)
+
+
