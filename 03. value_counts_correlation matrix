@@ -1,0 +1,66 @@
+
+--cat var:
+    df.product_type.value_counts()
+    df.product_type.value_counts(normalize=True)
+
+    df.product_type.value_counts().to_frame()
+    df.product_type(columns={'wheels':'value_counts'},inplace=True)
+
+    sns.boxplot(x='wheels',y='price',data=df)
+
+    scatterplot
+
+    y=df['price']
+    x=df['engine-size']
+    plt.scatter(x,y)
+
+    plt.title('scatterplot of engine size vs price')
+    plt.xtitle('engine size')
+    plt.ylabel('price')
+ 
+---group data:
+#hierachical group:
+    grouped=df.groupby(['product_type','state']).size()
+    grouped.unstack(level='state')
+
+#calculate median:
+    df.groupby(['drive-wheels','body-style'], as_index=False).mean()
+    df[['product_type','price_doc']].groupby('product_type').median()
+
+    df.pivot(index='drive-wheels',columns='body-style')
+    df.pivot_table(index='product_type', values='price_doc', aggfunc=np.median)
+
+#apply function:
+    df[['life_sq','num_room']].apply(lambda x: x[0]/x[1], axis=1)
+
+#time: 
+    df['timestamp'] = pd.to_datetime(df.timestamp)
+    df['ts_year']=df['timestamp'].apply(lambda x:x.year) 
+
+---num_var
+#correlation matrix:
+    num_var=list(df_train.select_dtypes(include=np.number))
+    df[num_var].corr()
+    
+#heatmap: 
+    plt.figure(figsize=(10,8))
+    sns.heatmap(ts.corr(),annot=True,linewidths=.5)
+    ts.corr().median_house_value.sort_values(ascending=False)
+
+#deal with strong correlation:
+    dropcols=[]; dropcols.append('XXX')
+    dropcols=dropcols+missing_cols
+    df=df.drop(['parcelid','transactiondate'])
+    df=df.drop(dropcols,axis=1, inplace=True)
+        
+#set a threshold for missing groups: 
+    threshold=0.97
+    missing_prop=(df.isnull().sum()/len(df)).reset_index()
+    missing_prop.columns=['field','prop']
+    missing_prop=missing_prop.sort_values(by='prop',ascending=False)
+    missing_cols=missing_prop[missing_prop.prop>=threshold].field.tolist()       
+
+#plot:
+    missing.plot(x="column",y="count",kind='barh',figsize=(14,14),logx=False)
+
+    

@@ -48,3 +48,8 @@ def ndcg_score(ground_truth, predictions, k=5):
 labels_le = preprocessing.LabelEncoder()
 ytrain = labels_le.fit_transform(labels)
 label_map = dict(zip(labels_le.classes_, labels_le.transform(labels_le.classes_)))
+
+----
+
+
+pd.get_dummies(df['fuel'])

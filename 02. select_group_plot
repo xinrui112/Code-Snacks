@@ -13,22 +13,7 @@
          * df.loc[sq_index,'life_sq'] = np.NaN
     - drop columns:
          * df.drop('log_price',axis=1,inplace=True)
-* group data:
-    - value_counts: 
-         * na: df.life_sq.isna().sum()
-         * df.product_type.value_counts()
-         * df.product_type.value_counts(normalize=True)
-    - hierachical group:
-         * grouped=df.groupby(['product_type','state']).size()
-         * grouped.unstack(level='state')
-    - calculate median:
-         * df[['product_type','price_doc']].groupby('product_type').median()
-         * df.pivot_table(index='product_type', values='price_doc', aggfunc=np.median)
-    - apply function:
-         * df[['life_sq','num_room']].apply(lambda x: x[0]/x[1], axis=1)
-         * time: 
-           * df['timestamp'] = pd.to_datetime(df.timestamp)
-           * df['ts_year']=df['timestamp'].apply(lambda x:x.year)
+
 * plot data:
     - histgram:
          * df.price_doc.hist(bins=100)
