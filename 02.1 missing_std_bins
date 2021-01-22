@@ -35,21 +35,6 @@
 	df['length']=(df['length']-df['length'].min())/(df['length'].max()-df['length'].min())
 	df['length']=(df['length']-df['length'].mean())/df['length'].std()
 
----scaling
-	from sklearn.preprocessing import StandardScaler
-
-	scaler=StandardScaler()
-	scaled_df=scaler.fit_transform(df.loc[:,df.columns!='ocean_proximity']) 
-	scaled_df=pd.DataFrame(scaled_df,columns=df.columns.values[0:-1])
-	scaled_df.head()
-
-----SimpleImputer     
-    from sklearn.impute import SimpleImputer
-    
-    housing_num=housing.drop('ocean_proximity',axis=1) #drop cat col first.
-	imputer=SimpleImputer(strategy='median')
-    X=imputer.fit_transform(housing_num)
-    housing_tr=pd.DataFrame(X,columns=housing_num.columns)
 
 ----missing data:
     #index & rename:
@@ -57,6 +42,7 @@
 	    missing.columns=['column','count']
     #loc & sort:
     	missing= missing.loc[missing_df.count>0].sort_values(by='count')
+
 
 #bins
 	bins=np.linspace(min(df['price']),max(df['price'],4)

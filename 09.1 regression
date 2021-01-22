@@ -29,8 +29,38 @@ lm_rmse
   sns.distplot(Yhat, color='b',label='Fitted Value',ax=ax1)
 
 
-#polynomial regression
+2) polynomial regression
 先scaler
-from sklearn.preprocessing import PolynomialFeatures
-pr=PolynomialFeatures(degree=2, include_bias=False)
-pr.fit_transform([1,2])
+  from sklearn.preprocessing import PolynomialFeatures
+  pr=PolynomialFeatures(degree=2, include_bias=False)
+  pr.fit_transform([1,2])
+
+3) ridge regression - to deal with overfitting in polynomial 
+alpha to adjust the polynomial #As alpha increases, the parameters get smaller, it turns to underfitting
+  from sklearn.linear_model import Ridge
+  rm=Ridge(alpha=0.1)
+  rm.fit(X,y)
+  yhat=rm.predict(X)
+
+-----
+ordinal regression
+poisson regression
+fast forest quntile refression
+linear, polynomial, lasso, stepwise, rige regression
+bayesain linear regression
+neural netwoek regression
+decision forest regression
+boosted decision tree regression
+KNN (k nearest neighbors)
+
+
+
+
+
+
+
+
+
+
+
+
