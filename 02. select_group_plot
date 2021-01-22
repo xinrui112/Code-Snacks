@@ -23,6 +23,14 @@
          * df['log_price']=np.log(df['price_doc'].values)
          * plt.hist(df['log_price'],bins=100); plt.grid()
 
+#apply function:
+    df[['life_sq','num_room']].apply(lambda x: x[0]/x[1], axis=1)
+
+#time: 
+    df['timestamp'] = pd.to_datetime(df.timestamp)
+    df['ts_year']=df['timestamp'].apply(lambda x:x.year) 
+
+
 
 np.arange(5, 12) #int
 5 6 7 8 9 10 11
