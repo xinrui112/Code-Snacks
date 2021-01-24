@@ -22,6 +22,8 @@
     df.loc[df.fireplacecnt.isna(),'fireplacecnt'] = 0
 
 #convert name
+    df.groupby(by="a", dropna=False).sum()
+    
 	df.rename(columns={'city':'city/100km'},inplace=True)
 	convert type
 	df['price']=df['price'].astype('int')

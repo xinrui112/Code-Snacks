@@ -1,4 +1,4 @@
-1: select/group/plot
+1: select/plot
 
 * select features: 
     - num_var=list(df.select_dtypes(include=np.number))
@@ -42,6 +42,11 @@ np.random.random([6])
 
 noise = (np.random.random([15])*2-1)*2   #-2  2
 label = label+noise
+---
+#reset_index()
+df_grp=crime_df['PdDistrict'].value_counts().reset_index()
+df_grp.rename(columns={'index':'Neighborhood','PdDistrict':'Count'},inplace=True)
+df_grp
 
 
     

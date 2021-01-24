@@ -12,7 +12,13 @@ def display_scores(scores):
 
 display_scores(-tree_rmse)
 
-lin_rmse=cross_val_score(lin_reg,housing_prepared,housing_label,
+
+lm_rmse=cross_val_score(lm,X,y,
                        scoring='neg_root_mean_squared_error',
                        cv=10)
-display_scores(-lin_rmse)
+display_scores(-lm_rmse)
+
+
+cross_val_predict(lm,X_test,y_test,
+                       scoring='neg_root_mean_squared_error',
+                       cv=10)

@@ -17,7 +17,7 @@ lm_rmse
 #R2
 #%of var of Y is explained by the linear model.
 #R2=(1-mse of regression line/MSE of the avg of the data)
-  lm_score(X,y)
+  lm.score(X,y)
 
   sns.regplot(x='engine-size',y='price',data=df)
   plt.ylim(0,)
