@@ -1,14 +1,24 @@
 classification
 
-# decision tree
-	from sklearn.tree import DecisionTreeRegressor
-	tree_reg=DecisionTreeRegressor()
-	tree_reg.fit(housing_prepared,housing_label)
+1) decision tree
+	from sklearn.tree import DecisionTreeClassifier
+	drugTree = DecisionTreeClassifier(criterion="entropy", max_depth = 4)
+	drugTree.fit(X_train,y_train)
+	predTree = drugTree.predict(X_test)
 
-	housing_pred=tree_reg.predict(housing_prepared)
-	tree_mse=mean_squared_error(housing_label,housing_pred)
-	tree_rmse=np.sqrt(tree_mse)
-	tree_rmse
+2)Logistic Regression
+	from sklearn.linear_model import LogisticRegression
+
+	LR = LogisticRegression(C = 100, class_weight = 'balanced', max_iter = 1000)
+	LR.fit(X_train,Y_train)
+
+	Y_score = LR.predict_proba(X_test)[:,1]
+	y_pred = LR.predict(X_test)
+
+	print('Logistic Regression')
+	print('acc:', accuracy_score(Y_test, y_pred))
+	print('rec:', recall_score(Y_test, y_pred))
+	print('F1:', f1_score(Y_test, y_pred))
 
 3)random forest
 	from sklearn.ensemble import RandomForestRegressor
@@ -30,7 +40,8 @@ classification
 	X_test = test.drop('left',axis=1, inplace=False)
 	Y_test = test['left']
 
-	model = kNN(n_neighbors = 3, algorithm='auto', weights='distance')
+	k=3
+	model = kNN(n_neighbors = k, algorithm='auto', weights='distance')
 	model.fit(X_train,Y_train)
 
 	y_pred = model.predict(X_test)
@@ -40,19 +51,6 @@ classification
 	print('rec:', recall_score(Y_test, y_pred))
 	print('F1:', f1_score(Y_test, y_pred))
 
-5) #Logistic Regression
-	from sklearn.linear_model import LogisticRegression
-
-	model = LogisticRegression(C = 100, class_weight = 'balanced', max_iter = 1000)
-	model.fit(X_train,Y_train)
-
-	Y_score = model.predict_proba(X_test)[:,1]
-	y_pred = model.predict(X_test)
-
-	print('Logistic Regression')
-	print('acc:', accuracy_score(Y_test, y_pred))
-	print('rec:', recall_score(Y_test, y_pred))
-	print('F1:', f1_score(Y_test, y_pred))
 -----
 
 #ROC Curve function definition 
@@ -81,3 +79,6 @@ knn
 logistic regression
 neural networks
 support vevror machines (SCM)
+
+----metrics----
+
