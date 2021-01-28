@@ -3,6 +3,7 @@ Ordinalencoder/OnehotEncoder
 #OrdinalEncoder
 from sklearn.preprocessing import OrdinalEncoder
 oe=OrdinalEncoder()
+
 housing_cat_encoded=oe.fit_transform(housing_cat)
 housing_cat_encoded
 oe.categories_

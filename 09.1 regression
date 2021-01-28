@@ -44,6 +44,16 @@ alpha to adjust the polynomial #As alpha increases, the parameters get smaller, 
   rm.fit(X,y)
   yhat=rm.predict(X)
 
+4)decision tree
+  from sklearn.tree import DecisionTreeRegressor
+  tree_reg=DecisionTreeRegressor()
+  tree_reg.fit(housing_prepared,housing_label)
+  housing_pred=tree_reg.predict(housing_prepared)
+  
+  tree_mse=mean_squared_error(housing_label,housing_pred)
+  tree_rmse=np.sqrt(tree_mse)
+  tree_rmse
+
 -----
 ordinal regression
 poisson regression
