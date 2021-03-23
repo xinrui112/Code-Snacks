@@ -1,5 +1,12 @@
 1: select/plot
 
+---groupby----
+df.groupby('attorney_id')['specialty_id'].nunique().sort_values()
+
+
+
+
+---
 * select features: 
     - num_var=list(df.select_dtypes(include=np.number))
     - num_var.remove('id')
