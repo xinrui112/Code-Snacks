@@ -1,0 +1,123 @@
+classification
+
+1) decision tree
+	from sklearn.tree import DecisionTreeClassifier
+	drugTree = DecisionTreeClassifier(criterion="entropy", max_depth = 4)
+	drugTree.fit(X_train,y_train)
+	predTree = drugTree.predict(X_test)
+
+2)Logistic Regression
+	from sklearn.linear_model import LogisticRegression
+
+	LR = LogisticRegression(C = 100, class_weight = 'balanced', max_iter = 1000)
+	LR.fit(X_train,Y_train)
+
+	y_pred = LR.predict(X_test)
+	ypred_prob = LR.predict_proba(X_test) #percentage of class.
+
+	print('Logistic Regression')
+	print('acc:', accuracy_score(Y_test, y_pred))
+	print('rec:', recall_score(Y_test, y_pred))
+	print('F1:', f1_score(Y_test, y_pred))
+
+3)random forest
+	from sklearn.ensemble import RandomForestRegressor
+
+	rf_reg=RandomForestRegressor()
+	rf_reg.fit(housing_prepared,housing_label)
+
+	rf_rmse=cross_val_score(rf_reg,housing_prepared,housing_label,
+	                       scoring='neg_root_mean_squared_error',
+	                       cv=10)
+	display_scores(-rf_rmse)
+
+	rf.get_params()
+
+	----
+	from sklearn.ensemble import RandomForestClassifier
+
+	rF=RandomForestClassifier(n_estimators=200)
+	rF.fit(x_train, y_train)
+	y_pred=rF.predict(x_test)
+
+	from sklearn.metrics import accuracy_score,recall_score, f1_score
+	from sklearn.metrics import classification_report, confusion_matrix
+	print('Random Forest')
+	print("Accuracy: ", accuracy_score(y_test, y_pred))
+	print (classification_report(y_test, y_pred))
+
+
+4)#KNN
+	from sklearn.neighbors import KNeighborsClassifier as kNN
+	from sklearn.metrics import accuracy_score, recall_score, f1_score
+	X_train = train.drop('left',axis=1, inplace=False)
+	Y_train = train['left']
+	X_test = test.drop('left',axis=1, inplace=False)
+	Y_test = test['left']
+
+	k=3
+	model = kNN(n_neighbors = k, algorithm='auto', weights='distance')
+	model.fit(X_train,Y_train)
+
+	y_pred = model.predict(X_test)
+
+	print('KNN')
+	print('acc:', accuracy_score(Y_test, y_pred))
+	print('rec:', recall_score(Y_test, y_pred))
+	print('F1:', f1_score(Y_test, y_pred))
+
+5) Gradient Boost
+	from sklearn.ensemble import GradientBoostingClassifier
+
+	gB=GradientBoostingClassifier(learning_rate=1.5, verbose=1)
+	gB.fit(x_train, y_train)
+	y_pred=gB.predict(x_test)
+
+	print('Gradient Boost')
+	print("Accuracy: ", accuracy_score(y_test, y_pred))
+	print (classification_report(y_test, y_pred))
+
+-----
+
+#ROC Curve function definition 
+	from sklearn.metrics import roc_auc_score, roc_curve
+	def roccurve():
+	    model_roc_auc = round(roc_auc_score(Y_test, Y_score),3)
+	    fpr, tpr, t = roc_curve(Y_test, Y_score)
+	    trace4 = go.Scatter(x = fpr,y = tpr,
+	                        name = "Roc : ",
+	                        line = dict(color = ('rgb(22, 96, 167)'),width = 2), fill='tozeroy')
+	    trace5 = go.Scatter(x = [0,1],y = [0,1],
+	                        line = dict(color = ('black'),width = 1.5,
+	                        dash = 'dot'))
+
+	    layout = go.Layout(title = str("ROC Curve"+" "+'('+str(model_roc_auc)+')'),
+	                   xaxis = dict(title = 'false positive rate'),
+	                   yaxis = dict(title = 'true positive rate'))
+	    fig = go.Figure(data=[trace4, trace5], layout= layout)
+	    py.iplot(fig)
+	roccurve()
+-----
+decision tree
+naive bayes
+linear discriminant analysis
+knn
+logistic regression
+neural networks
+support vector machines (SVM)
+
+----metrics----
+1) jaccard_score
+	from sklearn.metrics import jaccard_score
+	jaccard_score(y_test, yhat,pos_label=0)
+
+2) confusion matrix
+	from sklearn.metrics import confusion_matrix
+	confusion_matrix(y_test, yhat, labels=[1,0])
+
+	from sklearn.metrics import classification_report
+	print (classification_report(y_test, yhat))
+3) logloss
+	from sklearn.metrics import log_loss
+	log_loss(y_test, yhat_prob)
+

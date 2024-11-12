@@ -1,0 +1,55 @@
+02.1 data wrangling
+
+#replace missing values:
+    df.dropna()
+    df.dropna(subset=['price'],axis=0, inplace=True)
+
+	mean=df['price'].mean()
+	df['price'].replace(np.nan, mean)
+
+	poolsize_median = df.loc[df.poolcnt > 0, 'poolsizesum'].median()
+    df.loc[(df.poolcnt>0 & df.poolsizesum.isna()),'poolsizesum']=poolsize_median
+
+    # one column:
+    df.loc[df.pooltype.isa(),'pooltype'] = 0/'None'/"N/A"
+    
+    # other columns:
+    df.loc[(df['poolcnt'] == 0), 'poolsizesum'] = 0
+        
+    # three values: Yes/No/0
+    df['fireplaceflag']= "No"
+    df.loc[df['fireplacecnt']>0,'fireplaceflag']= "Yes"
+    df.loc[df.fireplacecnt.isna(),'fireplacecnt'] = 0
+
+#convert name
+    df.groupby(by="a", dropna=False).sum()
+    
+	df.rename(columns={'city':'city/100km'},inplace=True)
+	convert type
+	df['price']=df['price'].astype('int')
+
+#standardization
+	simple feature scaling: x=x/xmax
+	min-max: x=(x-xmin)/range
+	zsore: x=(x-mean)/std
+
+	df['length']=df['length']/df['length'].max()
+	df['length']=(df['length']-df['length'].min())/(df['length'].max()-df['length'].min())
+	df['length']=(df['length']-df['length'].mean())/df['length'].std()
+
+
+----missing data:
+    #index & rename:
+	    missing=df.isna().sum().reset_index()
+	    missing.columns=['column','count']
+    #loc & sort:
+    	missing= missing.loc[missing_df.count>0].sort_values(by='count')
+
+
+#bins
+	bins=np.linspace(min(df['price']),max(df['price'],4)
+	group_names=['low','median','high']
+	df['price_bins']=pd.cut(df['price'],bins,labels=group_names, include_lowest=True)
+
+
+

@@ -1,0 +1,41 @@
+train.test split
+from sklearn.model_selection import train_test_split
+X=df.drop(['median_house_value'],axis=1)
+y=df['median_house_value']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=123)
+print("Total sample size = %i\n training sample size = %i \n testing sample size = %i"\
+%(df.shape[0],X_train.shape[0],X_test.shape[0]))
+
+-----
+更简单
+from sklearn.model_selection import train_test_split
+train_df, test_df = train_test_split(df,test_size=0.33, random_state=123)
+print("Total sample size = %i\n training sample size = %i \n testing sample size = %i"\
+%(df.shape[0],train_df.shape[0],test_df.shape[0]))
+
+------
+更科学
+StratifiedSplit based on income
+
+# 1. create categorical income
+df['income_bins']=pd.cut(df.median_income,
+                         bins=[0,1.5,3,4.5,6,7.5,np.inf],
+                         labels=[1,2,3,4,5,6])
+df.income_bins.hist(bins=20)
+
+# 2. split
+from sklearn.model_selection import StratifiedShuffleSplit
+split=StratifiedShuffleSplit(n_splits=1,test_size=0.2,random_state=123)
+for train_index,test_index in split.split(df,df.income_bins):
+    train_set=df.loc[train_index]
+    test_set=df.loc[test_index]
+
+----
+简单粗暴
+X_train, X_test,y_train,y_test= X[:60000],X[60000:],y[:60000],y[60000:]
+
+print(X_train.shape, X_test.shape)
+###(60000, 784) (10000, 784)
+
+

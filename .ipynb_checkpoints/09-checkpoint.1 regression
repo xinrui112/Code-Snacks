@@ -1,0 +1,105 @@
+
+1) linear regression
+from sklearn.linear_model import LinearRegression
+
+X=df[[col,col2,col3]]
+lm=LinearRegression()
+lm.fit(X,y)
+
+yhat=lm.predict(X)
+
+from sklearn.metrics import mean_squared_error
+housing_pred=lm.predict(housing_prepared)
+lm_mse=mean_squared_error(housing_label,housing_pred)
+lm_rmse=np.sqrt(lm_mse)
+lm_rmse
+
+#R2
+#%of var of Y is explained by the linear model.
+#R2=(1-mse of regression line/MSE of the avg of the data)
+  lm.score(X,y)
+
+  sns.regplot(x='engine-size',y='price',data=df)
+  plt.ylim(0,)
+
+  sns.residplot(x='engine-size',y='price',data=df) #if constant residuals
+  
+  distribution plots of trian and test df
+  ax1=sns.distplot(df['price'],hist=False, color='r', label='Actual value')
+  sns.distplot(Yhat, color='b',label='Fitted Value',ax=ax1)
+
+
+2) polynomial regression
+先scaler
+  from sklearn.preprocessing import PolynomialFeatures
+  pr=PolynomialFeatures(degree=2)
+  X_train_poly = poly.fit_transform(X_train)
+  clf = linear_model.LinearRegression()
+  ypred_train = clf.fit(X_train_poly, y_train)
+
+3) ridge regression - to deal with overfitting in polynomial 
+alpha to adjust the polynomial #As alpha increases, the parameters get smaller, it turns to underfitting
+  from sklearn.linear_model import Ridge
+  rm=Ridge(alpha=0.1)
+  rm.fit(X,y)
+  yhat=rm.predict(X)
+
+4)decision tree
+  from sklearn.tree import DecisionTreeRegressor
+  tree_reg=DecisionTreeRegressor()
+  tree_reg.fit(housing_prepared,housing_label)
+  housing_pred=tree_reg.predict(housing_prepared)
+  
+  tree_mse=mean_squared_error(housing_label,housing_pred)
+  tree_rmse=np.sqrt(tree_mse)
+  tree_rmse
+
+-----
+ordinal regression
+poisson regression
+fast forest quntile refression
+linear, polynomial, lasso, stepwise, rige regression
+bayesain linear regression
+neural netwoek regression
+decision forest regression
+boosted decision tree regression
+KNN (k nearest neighbors)
+
+--metrics--
+mean_squared_error
+  from sklearn.metrics import mean_squared_error
+  lm_mse=mean_squared_error(y_label,y_pred)
+
+r2_score
+  from sklearn.metrics import r2_score
+  lm_r2=r2_score(y_label,y_pred)
+  lm.score(X_test,y_test)
+
+mean_absolute_error
+  from sklearn.metrics import mean_absolute_error
+  lm_mae=mean_absolute_error(y_label,y_pred)
+
+
+
+--example---
+from sklearn.metrics import mean_squared_error,r2_score
+from sklearn.metrics import mean_absolute_error
+
+X_test = test_df[['ENGINESIZE']] #double []
+y_test = test_df[['CO2EMISSIONS']]
+ypred_test = lm.predict(X_test)
+
+print("Mean absolute error: %.2f" % mean_absolute_error(y_test, ypred_test))
+print("Residual sum of squares (MSE): %.2f" % mean_squared_error(y_test, ypred_test))
+print("R2-score: %.2f" % r2_score(y_test, ypred_test) )
+
+
+
+
+
+
+
+
+
+
+
